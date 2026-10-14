@@ -39,8 +39,10 @@ public class SecurityConfig {
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 // Public endpoints
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/h2-console/**").permitAll()
+               // Public endpoints
+               .requestMatchers("/", "/error").permitAll()
+               .requestMatchers("/api/auth/**").permitAll()
+               .requestMatchers("/h2-console/**").permitAll()
                 // Admin-only
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 // Doctor endpoints
